@@ -254,6 +254,9 @@ export default function HomePage() {
   };
 
   return (
+    <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-sky-50 to-emerald-50 px-4 py-8 text-slate-900 dark:from-slate-950 dark:via-indigo-950 dark:to-slate-900 dark:text-slate-50">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
+        <header className="flex flex-col gap-3 rounded-2xl border border-indigo-100 bg-white/75 p-4 shadow-sm backdrop-blur sm:flex-row sm:items-center sm:justify-between dark:border-slate-700 dark:bg-slate-900/70">
     <main className="min-h-screen bg-slate-100 px-4 py-8 text-slate-900 dark:bg-slate-950 dark:text-slate-50">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
         <header className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -267,6 +270,12 @@ export default function HomePage() {
         </header>
 
         <section className="grid gap-6 lg:grid-cols-[360px,1fr]">
+          <aside className="space-y-4 rounded-xl border border-indigo-200 bg-white/90 p-4 shadow-xl shadow-indigo-100/50 dark:border-slate-700 dark:bg-slate-900/90 dark:shadow-none">
+            <div className="grid grid-cols-2 gap-2 rounded-lg bg-gradient-to-r from-indigo-100 to-cyan-100 p-1 dark:from-slate-800 dark:to-slate-800">
+              <button
+                type="button"
+                className={`rounded px-3 py-2 text-sm font-medium ${
+                  mode === "text" ? "bg-white text-indigo-700 shadow-sm dark:bg-slate-700 dark:text-indigo-200" : ""
           <aside className="space-y-4 rounded-xl border border-slate-300 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
             <div className="grid grid-cols-2 gap-2 rounded-lg bg-slate-100 p-1 dark:bg-slate-800">
               <button
@@ -281,6 +290,7 @@ export default function HomePage() {
               <button
                 type="button"
                 className={`rounded px-3 py-2 text-sm font-medium ${
+                  mode === "github" ? "bg-white text-indigo-700 shadow-sm dark:bg-slate-700 dark:text-indigo-200" : ""
                   mode === "github" ? "bg-white text-slate-900 dark:bg-slate-700 dark:text-slate-100" : ""
                 }`}
                 onClick={() => setMode("github")}
@@ -362,6 +372,16 @@ export default function HomePage() {
             </label>
 
             <div className="grid grid-cols-4 gap-2">
+              <button type="button" onClick={saveDesignJson} className="rounded-md bg-gradient-to-r from-indigo-600 to-blue-600 px-2 py-2 text-xs font-semibold text-white hover:from-indigo-500 hover:to-blue-500">
+                Save JSON
+              </button>
+              <button type="button" onClick={() => void copyDesignJson()} className="rounded-md bg-gradient-to-r from-violet-600 to-fuchsia-600 px-2 py-2 text-xs font-semibold text-white hover:from-violet-500 hover:to-fuchsia-500">
+                Copy JSON
+              </button>
+              <button type="button" onClick={() => fileInputRef.current?.click()} className="rounded-md bg-gradient-to-r from-slate-700 to-slate-600 px-2 py-2 text-xs font-semibold text-white hover:from-slate-600 hover:to-slate-500">
+                Import JSON
+              </button>
+              <button type="button" onClick={() => void copyShareLink()} className="rounded-md bg-gradient-to-r from-blue-600 to-cyan-600 px-2 py-2 text-xs font-semibold text-white hover:from-blue-500 hover:to-cyan-500">
               <button type="button" onClick={saveDesignJson} className="rounded-md bg-indigo-600 px-2 py-2 text-xs font-semibold text-white hover:bg-indigo-500">
                 Save JSON
               </button>
@@ -377,6 +397,7 @@ export default function HomePage() {
               <input ref={fileInputRef} type="file" accept="application/json" className="hidden" onChange={importDesignFromFile} />
             </div>
 
+            <div className="rounded-lg border border-indigo-100 bg-indigo-50/40 p-3 dark:border-slate-700 dark:bg-slate-800/60">
             <div className="rounded-lg border border-slate-200 p-3 dark:border-slate-700">
               <p className="mb-2 text-sm font-semibold">Import JSON via Paste</p>
               <textarea
@@ -394,6 +415,7 @@ export default function HomePage() {
               </button>
             </div>
 
+            <div className="rounded-lg border border-cyan-100 bg-cyan-50/40 p-3 dark:border-slate-700 dark:bg-slate-800/60">
             <div className="rounded-lg border border-slate-200 p-3 dark:border-slate-700">
               <div className="mb-2 flex items-center justify-between">
                 <p className="text-sm font-semibold">Gradient Intensity Colors (0-4)</p>
@@ -437,6 +459,7 @@ export default function HomePage() {
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
+                className="rounded-md bg-gradient-to-r from-emerald-600 to-green-500 px-4 py-2 text-sm font-semibold text-white transition hover:from-emerald-500 hover:to-green-400 disabled:cursor-not-allowed disabled:from-slate-400 disabled:to-slate-400"
                 className="rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-500 disabled:cursor-not-allowed disabled:bg-slate-400"
                 onClick={() =>
                   exportGridToPng(previewGrid, {
@@ -452,6 +475,7 @@ export default function HomePage() {
               </button>
               <button
                 type="button"
+                className="rounded-md bg-gradient-to-r from-teal-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white transition hover:from-teal-500 hover:to-cyan-400 disabled:cursor-not-allowed disabled:from-slate-400 disabled:to-slate-400"
                 className="rounded-md bg-teal-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-500 disabled:cursor-not-allowed disabled:bg-slate-400"
                 onClick={() =>
                   exportGridToSvg(previewGrid, {
